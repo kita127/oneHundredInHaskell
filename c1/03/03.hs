@@ -8,11 +8,4 @@ import Data.Char (isAlpha)
 str = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
 
 main :: IO ()
-main = do
-  let res = words str
-  let res2 = map countWord res
-  print res2
-  return ()
-
-countWord :: String -> Int
-countWord = length . filter isAlpha
+main = print . map (length . filter isAlpha) . words $ str
