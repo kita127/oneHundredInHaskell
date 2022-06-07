@@ -5,8 +5,6 @@ import System.Environment (getArgs)
 
 main :: IO ()
 main = do
-  args <- getArgs
-  let fileName = head args
-  contents <- readFile fileName
+  contents <- readFile . head =<< getArgs
   let output = map (\c -> if c == '\t' then ' ' else c) contents
   putStr output
