@@ -9,8 +9,7 @@ import System.Environment (getArgs)
 
 main :: IO ()
 main = do
-  args <- getArgs
-  let fileName = head args
+  fileName <- head <$> getArgs
   contents <- readFile fileName
   let wordCnt = length . concatMap words . lines $ contents
       lineCnt = length . lines $ contents
