@@ -9,15 +9,15 @@ main = do
   args <- getArgs
   let l = read $ args !! 0
       f = args !! 1
-  cs <- hoge l <$> readFile f
-  void $ out (length cs) cs
+  cs <- solve l <$> readFile f
+  void $ outFile cs
 
-hoge :: Int -> String -> [String]
-hoge l = aaa l . lines
+solve :: Int -> String -> [String]
+solve l = map unlines . split l . lines
 
-aaa :: Int -> [String] -> [String]
-aaa _ [] = []
-aaa l ss = unlines (take l ss) : aaa l (drop l ss)
+split :: Int -> [a] -> [[a]]
+split _ [] = []
+split n ls = take n ls : split n (drop n ls)
 
-out :: Int -> [String] -> IO [()]
-out len = zipWithM (\a b -> writeFile ('y' : show a) b) [1 .. len]
+outFile :: [String] -> IO [()]
+outFile = zipWithM (\a b -> writeFile ('y' : show a) b) [1 ..]
