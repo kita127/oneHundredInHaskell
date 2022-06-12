@@ -7,7 +7,7 @@
 
 --     1  2  3    4       5     6     7   8       9         10  11      12    13   14   15    16       17      18     19   20
 --     x                  x     x     x   x       x                                     x     x                       x
---     H  e  i    e       B     C     N   O       F         e   a       i     l    i    P     S        l       r      K    a
+--     H  He Li   Be      B     C     N   O       F         Ne  Na      Mi    Al   Si   P     S        Cl      Ar     K    Ca
 str = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
 
 nlist = [1, 5, 6, 7, 8, 9, 15, 16, 19]
@@ -20,4 +20,4 @@ main = do
   print res
 
 solve :: String -> Int -> (String, Int)
-solve s n = if n `elem` nlist then (head s : "", n) else ((s !! 1) : "", n)
+solve s n = if n `elem` nlist then (head s : "", n) else (head s : (s !! 1) : "", n)
