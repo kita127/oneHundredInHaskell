@@ -5,9 +5,7 @@ import System.Environment (getArgs)
 
 main :: IO ()
 main = do
-  args <- getArgs
-  let n = read $ args !! 0
-      f = args !! 1
+  (n, f) <- (\(x : y : _) -> (read x, y)) <$> getArgs
   output <- solve n <$> readFile f
   putStr output
 
