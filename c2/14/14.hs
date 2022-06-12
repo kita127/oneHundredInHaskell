@@ -5,10 +5,8 @@ import System.Environment (getArgs)
 
 main :: IO ()
 main = do
-  args <- getArgs
-  let n = read . head $ args
-      fileName = args !! 1
-  contentsN <- initN n <$> readFile fileName
+  (n, f) <- (\(x : y : _) -> (read x, y)) <$> getArgs
+  contentsN <- initN n <$> readFile f
   putStrLn contentsN
 
 initN :: Int -> String -> String
