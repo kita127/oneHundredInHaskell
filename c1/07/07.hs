@@ -6,7 +6,7 @@ import System.Environment (getArgs)
 
 main :: IO ()
 main = do
-  (x, y, z) <- (\(a : b : c : _) -> (a, b, c)) <$> getArgs
+  (x : y : z : _) <- getArgs
   let res = solve x y z
   putStrLn res
 
