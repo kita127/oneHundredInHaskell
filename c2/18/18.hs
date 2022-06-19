@@ -11,22 +11,25 @@ main :: IO ()
 main = do
   [f] <- getArgs
   contents <- readFile f
-  let x = unlines . map snd . sortX . map fuga . hoge $ contents
-  putStrLn x
-  return ()
+  putStr . unlines . map snd . specificSort . map genPare . lines $ contents
 
-hoge :: String -> [String]
-hoge = lines
+genPare :: String -> (Int, String)
+genPare s = let x = read . (!! 2) . words $ s in (x, s)
 
-fuga :: String -> (Int, String)
-fuga s = let x = read . (!! 2) . words $ s in (x, s)
-
-sortX :: [(Int, String)] -> [(Int, String)]
-sortX =
+-- ソート順
+-- 3列目→1列目→4列目の順で降順
+--
+specificSort :: [(Int, String)] -> [(Int, String)]
+specificSort =
   sortBy
     ( \(a, s1) (b, s2) ->
         let x = compare b a
          in case x of
-              EQ -> compare ((head . words) s1) ((head . words) s2)
+              EQ ->
+                let y = compare ((head . words) s2) ((head . words) s1)
+                 in case y of
+                      EQ -> compare (((!! 3) . words) s2) (((!! 3) . words) s1)
+                      _ -> y
               _ -> x
     )
+
