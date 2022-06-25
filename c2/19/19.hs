@@ -11,8 +11,6 @@ main = do
   let rs = map snd . sortBy specific . map (\x -> (length x, head x)) . group . sort . map (head . words) . lines $ c
   mapM_ putStrLn rs
 
--- mapM_ putStrLn res
-
 specific :: (Int, String) -> (Int, String) -> Ordering
 specific (xn, xs) (yn, ys) =
   let res = compare yn xn
